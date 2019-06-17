@@ -6,7 +6,7 @@ spring:
     name: zookeeper-server
   cloud:
     zookeeper:
-      connect-string: localhost:2180
+      connect-string: localhost:2181
       discovery:
         enabled: true
         register: true

@@ -1,12 +1,16 @@
 server:
-  port: 8083
+  port: 8082
+
+feign:
+  hystrix:
+    enabled: true
 
 spring:
   application:
     name: zookeeper-client
   cloud:
     zookeeper:
-      connect-string: localhost:2180
+      connect-string: localhost:2181
       discovery:
         enabled: true
         register: false
