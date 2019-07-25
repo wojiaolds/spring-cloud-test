@@ -1,5 +1,6 @@
 package com.lds.boot;
 
+import com.lds.boot.event.MailSendEvent;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.boot.web.servlet.context.ServletWebServerInitializedEvent;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextStoppedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Component;
@@ -28,6 +31,8 @@ public class MyContextListener {
 
     @Autowired
     private ServerProperties properties;
+    
+    private ApplicationContext applicationContext;
 
 
 
@@ -36,7 +41,6 @@ public class MyContextListener {
         System.out.println("*********" + (++counter) + ": " + event.toString() + "*********");
         if(event instanceof ApplicationReadyEvent){
             LOGGER.info("Application Ready");
-            System.out.println("*********" + (++counter) + ": " + event.toString() + "*********");
             String ctx = properties.getServlet().getContextPath();
             ApplicationContext act = ContextLoader.getCurrentWebApplicationContext();
 
@@ -65,7 +69,14 @@ public class MyContextListener {
             message+= String.format(" , %s%s%s%s%s", "http://", host, portPart, ctx, "");
             LOGGER.info(message);
 
+        }else if(event instanceof ServletWebServerInitializedEvent){
+            applicationContext = ( ( ServletWebServerInitializedEvent ) event ).getApplicationContext ();
+            System.out.println("MailSender开始发送邮件");
+            MailSendEvent mailSendEvent = new MailSendEvent(applicationContext, "武汉");
+            applicationContext.publishEvent (mailSendEvent);
+            
         }
+       
     }
 
 }
