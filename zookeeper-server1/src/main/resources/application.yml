@@ -1,16 +1,12 @@
 server:
-  port: 9005
-
-feign:
-  hystrix:
-    enabled: true
+  port: 9001
 
 spring:
   application:
-    name: zookeeper-client
+    name: zookeeper-server
   cloud:
     zookeeper:
       connect-string: localhost:2180
       discovery:
         enabled: true
-        register: false
+        register: true  #表示会去注册中心注册服务

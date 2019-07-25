@@ -10,12 +10,13 @@ import java.util.UUID;
 @RestController
 public class ServerController {
 
-    @Autowired
-    private ServerProperties serverProperties;
+//    private static final UUID INSTANCE_UUID = UUID.randomUUID();
+@Autowired
+private ServerProperties serverProperties;
 
     @GetMapping("/test")
     public String test(){
-
+//        System.out.println("test :" + INSTANCE_UUID.toString());
         return serverProperties.getPort().toString();
     }
 

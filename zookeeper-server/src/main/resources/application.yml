@@ -1,12 +1,12 @@
 server:
-  port: 8081
+  port: 9000
 
 spring:
   application:
     name: zookeeper-server
   cloud:
     zookeeper:
-      connect-string: localhost:2181
+      connect-string: localhost:2180
       discovery:
         enabled: true
-        register: true
+        register: true  #表示会去注册中心注册服务
