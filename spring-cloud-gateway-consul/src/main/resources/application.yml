@@ -1,0 +1,30 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: cloud-gateway-consul
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: add_request_parameter_route
+          uri: lb://service-producer
+          filters:
+            - AddRequestParameter=name,wojiaolds
+            - name: Hystrix
+              args:
+                name: fallbackcmd
+                fallbackUri: forward:/fallback
+          predicates:
+            - Method=GET
+    consul:
+      host: 127.0.0.1
+      port: 8500
+
+logging:
+  level:
+    org.springframework.cloud.gateway: debug
+
+

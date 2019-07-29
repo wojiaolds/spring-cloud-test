@@ -15,7 +15,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication
 @EnableHystrix
 @EnableHystrixDashboard
-@EnableDiscoveryClient
+//@EnableDiscoveryClient
 @EnableFeignClients
 public class ZookeeperClientApplication {
 
