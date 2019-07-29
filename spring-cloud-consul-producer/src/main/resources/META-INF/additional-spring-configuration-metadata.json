@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "teacher.name",
+      "type": "java.lang.String",
+      "description": "Description for teacher.name.",
+      "sourceType": "com.lds.example.springcloudconsulproducer.bean.Teacher"
+  }
+] }
