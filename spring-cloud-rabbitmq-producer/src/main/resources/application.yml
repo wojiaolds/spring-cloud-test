@@ -1,0 +1,23 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: rabbitmq-producer
+  rabbitmq:
+    host: localhost
+    username: guest
+    password: guest
+    port: 5672
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+
+rabbitmq:
+  orderqueueName: order-queue
+  messagequeueName: message-queue
+  fanoutexchangeName: fanout-exchange
+  directexchangeName: direct-exchange
+  fanoutrouteKey: fanout-routeKey
+  directrouteKey: direct-routeKey
