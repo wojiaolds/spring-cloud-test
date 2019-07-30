@@ -46,12 +46,16 @@ public class RabbitMqConfig {
 	public Jackson2JsonMessageConverter jackson2JsonMessageConverter(ObjectMapper objectMapper) {
 		return new Jackson2JsonMessageConverter(objectMapper);
 	}
-	
+
 	/**
-	 * exchangeMessageLog
-	 *
-	 * @return DirectExchange
+	 * exchangeMessageLog\
+	 * name:
+	 * durable: 为true，声明exchange是持久化的，当RabbitMQ崩溃了重启后exchange仍然存在；
+	 * autoDelete： 当该exchange所有的队列都被unbind之后，该exchange自动被删除
+	 * @return
 	 */
+
+
 	@Bean
 	public DirectExchange exchangeMessageLog() {
 		return new DirectExchange(RabbitmqConstant.EXCHANGE_MESSAGE_LOG.class.getSimpleName(), true, false);
