@@ -1,4 +1,4 @@
-package com.lds.boot;
+package com.lds.boot.listener;
 
 import com.lds.boot.event.MailSendEvent;
 import org.apache.commons.lang3.StringUtils;
@@ -10,14 +10,10 @@ import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.boot.web.servlet.context.ServletWebServerInitializedEvent;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.ContextStoppedEvent;
 import org.springframework.context.event.EventListener;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.ContextLoader;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
