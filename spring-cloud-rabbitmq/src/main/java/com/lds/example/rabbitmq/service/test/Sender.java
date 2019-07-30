@@ -1,5 +1,6 @@
-package com.lds.example.rabbitmq.service;
+package com.lds.example.rabbitmq.service.test;
 
+import com.lds.example.rabbitmq.service.test1.Config;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,7 +21,8 @@ public class Sender {
 		String content = "hello" + new Date ();
 		System.out.println("Sender:" +content);
 		//生产者Send会像Queue=hello发送一条消息
-		this.rabbitmqTemplate.convertAndSend("hello", content);
+		this.rabbitmqTemplate.convertAndSend(Config.routeKey, content);
+	
 
 	}
 	

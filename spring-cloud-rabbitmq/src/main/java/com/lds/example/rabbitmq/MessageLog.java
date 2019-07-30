@@ -5,9 +5,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lds.example.rabbitmq.constant.RabbitmqConstant;
 import com.lds.example.rabbitmq.domain.CompleteLog;
 import com.lds.example.rabbitmq.domain.ErrorLog;
+import com.lds.example.rabbitmq.domain.ReceiveLog;
 import com.lds.example.rabbitmq.domain.SendLog;
 import lombok.extern.slf4j.Slf4j;
 
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

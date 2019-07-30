@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -12,8 +13,10 @@ import java.util.Date;
 @Data
 @ToString
 @EqualsAndHashCode(callSuper = false)
-public class SendLog {
-
+public class SendLog implements Serializable{
+    
+    private static final long serialVersionUID = -4882610202107744214L;
+    
     /**
      * 日志ID
      */

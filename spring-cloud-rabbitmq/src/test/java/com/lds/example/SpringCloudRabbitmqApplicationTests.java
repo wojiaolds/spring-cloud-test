@@ -1,6 +1,6 @@
 package com.lds.example;
 
-import com.lds.example.rabbitmq.service.Sender;
+import com.lds.example.rabbitmq.service.test.Sender;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

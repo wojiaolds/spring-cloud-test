@@ -8,6 +8,7 @@ package com.lds.example.rabbitmq;
 
 import com.lds.example.rabbitmq.constant.RabbitmqConstant;
 import org.springframework.amqp.core.Binding;
+import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.Queue;
 
 import java.util.HashMap;
@@ -102,7 +103,9 @@ public interface IRabbitmqListener<T> {
      * @return Binding
      */
     default Binding dlxBinding ( String queueName, String exchangeName, String routingkey ) {
+        
         return new Binding (queueName, Binding.DestinationType.QUEUE, exchangeName, routingkey, null);
+    
     }
 
 }

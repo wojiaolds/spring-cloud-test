@@ -54,7 +54,7 @@ public class Rabbitmq {
         message.setExchange(exchange);
         message.setRoutingKey(routingKey);
         message.setTimestamp(System.currentTimeMillis());
-        this.amqpTemplate.convertAndSend(exchange, routingKey, message);
+//        this.amqpTemplate.convertAndSend(exchange, routingKey, message);
         messageLog.send(message);
     }
 

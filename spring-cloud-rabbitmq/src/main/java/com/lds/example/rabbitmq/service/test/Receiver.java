@@ -1,5 +1,6 @@
-package com.lds.example.rabbitmq.service;
+package com.lds.example.rabbitmq.service.test;
 
+import com.lds.example.rabbitmq.service.test1.Config;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
@@ -10,12 +11,12 @@ import org.springframework.stereotype.Component;
  */
 @Component
 //@RabbitListener表示对队列hello进行监听
-@RabbitListener (queues = "hello")
+@RabbitListener (queues = Config.queueName)
 public class Receiver {
 	//@RabbitHandler指定对消息的处理方法
 	@RabbitHandler
-	public void process(String hello){
-		System.out.println("Receiver:" + hello);
+	public void process(String message){
+		System.out.println("Receiver:" + message);
 	}
 }
 

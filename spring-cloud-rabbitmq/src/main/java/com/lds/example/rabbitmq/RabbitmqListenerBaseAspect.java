@@ -25,7 +25,7 @@ public class RabbitmqListenerBaseAspect {
     /**
      * 描述 : listenerAspect
      */
-    @Pointcut("@annotation(org.springframework.amqp.rabbit.annotation.RabbitListener) && this(org.itkk.udf.amqp.rabbitmq.IRabbitmqListener)")
+    @Pointcut("@annotation(org.springframework.amqp.rabbit.annotation.RabbitListener) && this(com.lds.example.rabbitmq.IRabbitmqListener)")
     protected void listenerAspect() {
         log.debug("RabbitmqListenerBaseAspect.listenerAspect");
     }

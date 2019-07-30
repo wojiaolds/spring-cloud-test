@@ -30,15 +30,17 @@ public class RabbitMqConfig {
 	 */
 	@Bean
 	public SimpleRabbitListenerContainerFactory rabbitListenerContainerFactoryPlus(
+	//SimpleRabbitListenerContainerFactory发现消息中有content_type有text就会默认将其转换成string类型的
 		SimpleRabbitListenerContainerFactory rabbitListenerContainerFactory,
 		Jackson2JsonMessageConverter jackson2JsonMessageConverter) {
 		rabbitListenerContainerFactory.setMessageConverter(jackson2JsonMessageConverter);
+		rabbitListenerContainerFactory.setConcurrentConsumers (3);
 		return rabbitListenerContainerFactory;
 	}
 	
 	/**
 	 * 描述 : jackson2JsonMessageConverter
-	 *
+	 *	对象转json
 	 * @param objectMapper objectMapper
 	 * @return jackson2JsonMessageConverter
 	 */
