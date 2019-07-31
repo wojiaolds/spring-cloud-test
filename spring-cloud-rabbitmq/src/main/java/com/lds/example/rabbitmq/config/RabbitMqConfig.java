@@ -15,11 +15,11 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class RabbitMqConfig {
-	//建立一个消息队列hello；
-	@Bean
-	public Queue helloQueue(){
-		return new Queue ("hello");
-	}
+//	//建立一个消息队列hello；
+//	@Bean
+//	public Queue helloQueue(){
+//		return new Queue ("hello");
+//	}
 	
 	/**
 	 * 描述 : rabbitListenerContainerFactoryPlus

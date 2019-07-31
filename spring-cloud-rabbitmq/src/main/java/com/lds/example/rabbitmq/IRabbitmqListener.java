@@ -68,6 +68,7 @@ public interface IRabbitmqListener<T> {
         Map<String, Object> args = new HashMap<>();
         args.put(RabbitmqConstant.X_DEAD_LETTER_EXCHANGE, dlxExchangeName);
         args.put(RabbitmqConstant.X_DEAD_LETTER_ROUTING_KEY, dlxRoutingkey);
+       
         return new Queue (queueName, true, false, false, args);
     }
 

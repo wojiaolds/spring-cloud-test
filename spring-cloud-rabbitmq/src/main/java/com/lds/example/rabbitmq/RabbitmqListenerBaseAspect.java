@@ -9,6 +9,7 @@ package com.lds.example.rabbitmq;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 
 import java.lang.reflect.Method;
@@ -38,9 +39,11 @@ public class RabbitmqListenerBaseAspect {
      */
     protected String getQueues(JoinPoint joinPoint) {
         try {
-            Method method = joinPoint.getTarget().getClass().getMethod(joinPoint.getSignature().getName(), RabbitmqMessage.class);
+            MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+            Method method = signature.getMethod ();
+//            Method method = joinPoint.getTarget().getClass().getMethod(joinPoint.getSignature().getName(), RabbitmqMessage.class);
             return Arrays.toString(method.getAnnotation(RabbitListener.class).queues());
-        } catch (NoSuchMethodException e) {
+        } catch (Exception e) {
             throw new RuntimeException (e);
         }
     }
