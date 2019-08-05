@@ -49,6 +49,7 @@ public class MyContextListener {
 
             String portPart = "";
             Integer port = properties.getPort();
+            if(port == null) port = 8080;
             if (port!=80) {
                 portPart = ":" + port;
             }
