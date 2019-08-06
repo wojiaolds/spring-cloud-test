@@ -7,6 +7,26 @@
     <groupId>com.lds.example</groupId>
     <artifactId>spring-cloud-test</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>spring-boot-study</module>
+        <module>spring-cloud-consumer-api</module>
+        <module>spring-cloud-consul-producer</module>
+        <module>spring-cloud-consul-producer-1</module>
+        <module>spring-cloud-consul-consumer</module>
+        <module>zookeeper-server</module>
+        <module>zookeeper-server1</module>
+        <module>zookeeper-client</module>
+        <module>zookeeper-client1</module>
+        <module>spring-cloud-zuul</module>
+        <module>spring-cloud-gateway</module>
+        <module>spring-cloud-gateway-consul</module>
+        <module>spring-cloud-hystrix</module>
+        <module>spring-cloud-hystrix-dashboard</module>
+        <module>spring-cloud-rabbitmq</module>
+        <module>spring-cloud-stream-sender</module>
+    </modules>
 
 
 </project>
