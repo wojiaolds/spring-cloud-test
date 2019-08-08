@@ -19,6 +19,7 @@
 	</properties>
 
 	<modules>
+		<module>demo</module>
 		<module>mvc-handler-mapping</module>
 		<module>spring-boot-redission</module>
 	</modules>

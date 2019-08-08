@@ -4,8 +4,14 @@ import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
 import org.redisson.client.codec.StringCodec;
 import org.redisson.config.Config;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.Resource;
+
+import java.io.IOException;
 
 /**
  * @ClassName RedissonConfig
@@ -17,14 +23,50 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class RedissonConfig {
-
-    @Bean
-    public RedissonClient getRedisson(){
-        Config config = new Config();
-        //单机模式  依次设置redis地址和密码
-        config.useSingleServer().
-                setAddress("redis://192.168.99.100:6379");
+    
+    /**
+     * 单机模式
+     * @param configFile
+     * @return
+     * @throws IOException
+     */
+    @Bean(destroyMethod="shutdown")
+    @ConditionalOnProperty(name = "redisson.mode",havingValue = "single")
+    RedissonClient singleRedissonClient( @Value ("classpath:/config/redisson-single-config.yml") Resource configFile) throws
+                                                                                                         IOException {
+        return getRedissonClient(configFile);
+    }
+    
+    /**
+     * 集群模式
+     * @param configFile
+     * @return
+     * @throws IOException
+     */
+    @Bean(destroyMethod="shutdown")
+    @ConditionalOnProperty(name = "redisson.mode",havingValue = "cluster")
+    RedissonClient clusterRedissonClient( @Value ("classpath:/config/redisson-cluster-config.yml") Resource configFile) throws
+                                                                                                                IOException {
+        return getRedissonClient(configFile);
+    }
+    
+    /**
+     * 哨兵模式自动装配
+     * @return
+     */
+    @Bean(destroyMethod="shutdown")
+    @ConditionalOnProperty(name = "redisson.mode",havingValue = "cluster")
+    RedissonClient sentinelRedissonClient( @Value ("classpath:/config/redisson-sentinel-config.yml") Resource configFile) throws
+                                                                                                                        IOException {
+      
+        return getRedissonClient(configFile);
+    }
+    
+    private RedissonClient getRedissonClient(Resource configFile) throws IOException{
+        Config config = Config.fromYAML (configFile.getInputStream());
         config.setCodec(new StringCodec());
         return Redisson.create(config);
     }
+    
+    
 }
