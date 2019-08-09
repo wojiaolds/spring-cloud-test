@@ -55,7 +55,7 @@ public class RedissonConfig {
      * @return
      */
     @Bean(destroyMethod="shutdown")
-    @ConditionalOnProperty(name = "redisson.mode",havingValue = "cluster")
+    @ConditionalOnProperty(name = "redisson.mode",havingValue = "sentinel")
     RedissonClient sentinelRedissonClient( @Value ("classpath:/config/redisson-sentinel-config.yml") Resource configFile) throws
                                                                                                                         IOException {
       

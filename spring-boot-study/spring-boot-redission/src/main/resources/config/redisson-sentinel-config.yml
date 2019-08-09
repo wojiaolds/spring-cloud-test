@@ -1,0 +1,4 @@
+sentinelServersConfig:
+  master-name: mymaster
+  password: xxxx
+  sentinel-addresses: 10.47.91.83:26379,10.47.91.83:26380,10.47.91.83:26381

@@ -1,18 +1,18 @@
 package com.lds.boot.redission;
 
-import com.baomidou.lock.annotation.Lock4j;
+
 import com.lds.boot.redission.config.RedissLockUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.redisson.RedissonLock;
+
 import org.redisson.api.RBucket;
+import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.annotation.Resource;
-import java.io.BufferedOutputStream;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -86,20 +86,27 @@ public class SpringBootRedissionApplicationTests {
             this.bufferedWriter = bufferedWriter;
             this.latch = latch;
         }
+    
+//        @Lock4j
+        void process() throws Exception{
+    
+            for ( int i = 1 ; i <= 100 ; i++ ) {
+                bufferedWriter.write ("线程" + name + "---->" + i+"\n");
+                //                    bufferedWriter.newLine ();
+                bufferedWriter.flush ();
+                sleep (1);
+            }
+    
+        }
         
         @Override
-        @Lock4j
+       
         public void run () {
             
             try {
-           
-                for ( int i = 1 ; i <= 100 ; i++ ) {
-                    bufferedWriter.write ("线程" + name + "---->" + i+"\n");
-//                    bufferedWriter.newLine ();
-                    bufferedWriter.flush ();
-                    sleep (1);
-                }
-             
+                RLock lock = redissLockUtil.lock ("wojiaolds");
+                process();
+                redissLockUtil.unlock (lock);
             }catch ( Exception e ){
                 System.out.println (e);
             }

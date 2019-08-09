@@ -18,10 +18,10 @@ import java.util.concurrent.TimeUnit;
  */
 @Component
 public class RedissLockUtil {
-	
+
 	@Autowired
 	private DistributedLocker redissLock;
-	
+
 	/**
 	 * 加锁
 	 *
@@ -30,30 +30,30 @@ public class RedissLockUtil {
 	 * @return
 	 */
 	public RLock lock ( String lockKey ) {
-		
+
 		return redissLock.lock (lockKey);
 	}
-	
+
 	/**
 	 * 释放锁
 	 *
 	 * @param lockKey
 	 */
 	public void unlock ( String lockKey ) {
-		
+
 		redissLock.unlock (lockKey);
 	}
-	
+
 	/**
 	 * 释放锁
 	 *
 	 * @param lock
 	 */
 	public void unlock ( RLock lock ) {
-		
+
 		redissLock.unlock (lock);
 	}
-	
+
 	/**
 	 * 带超时的锁
 	 *
@@ -61,10 +61,10 @@ public class RedissLockUtil {
 	 * @param timeout 超时时间   单位：秒
 	 */
 	public RLock lock ( String lockKey, int timeout ) {
-		
+
 		return redissLock.lock (lockKey, timeout);
 	}
-	
+
 	/**
 	 * 带超时的锁
 	 *
@@ -73,10 +73,10 @@ public class RedissLockUtil {
 	 * @param timeout 超时时间
 	 */
 	public RLock lock ( String lockKey, TimeUnit unit, int timeout ) {
-		
+
 		return redissLock.lock (lockKey, unit, timeout);
 	}
-	
+
 	/**
 	 * 尝试获取锁
 	 *
@@ -87,10 +87,10 @@ public class RedissLockUtil {
 	 * @return
 	 */
 	public boolean tryLock ( String lockKey, int waitTime, int leaseTime ) {
-		
+
 		return redissLock.tryLock (lockKey, TimeUnit.SECONDS, waitTime, leaseTime);
 	}
-	
+
 	/**
 	 * 尝试获取锁
 	 *
@@ -102,7 +102,7 @@ public class RedissLockUtil {
 	 * @return
 	 */
 	public boolean tryLock ( String lockKey, TimeUnit unit, int waitTime, int leaseTime ) {
-		
+
 		return redissLock.tryLock (lockKey, unit, waitTime, leaseTime);
 	}
 }
