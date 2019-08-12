@@ -4,6 +4,11 @@
 redisson:
   mode: cluster
 
+spring:
+  aop:
+    proxy-target-class: true
+
+
 #spring:
 #  redis:
 #    host: 192.168.99.100
