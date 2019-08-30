@@ -12,6 +12,7 @@
     <artifactId>spring-cloud-consul-consumer</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>spring-cloud-consul-consumer</name>
+    <packaging>jar</packaging>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -20,6 +21,7 @@
     </properties>
 
     <dependencies>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -44,7 +46,7 @@
         <dependency>
             <groupId>com.lds.example</groupId>
             <artifactId>spring-cloud-consumer-api</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>0.0.1</version>
         </dependency>
 
     </dependencies>
