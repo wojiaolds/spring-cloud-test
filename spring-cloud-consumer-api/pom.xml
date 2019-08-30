@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.lds.example</groupId>
     <artifactId>spring-cloud-consumer-api</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>spring-cloud-consumer-api</name>
     <packaging>jar</packaging>
     <description>Demo project for Spring Boot</description>
@@ -37,6 +37,12 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <!--spring-boot工程打包编译时，会生成两种jar包，一种是普通的jar，-->
+                    <!--另一种是可执行jar。默认情况下，这两种jar的名称相同，在不做配置的情况下，-->
+                    <!--普通的jar先生成，可执行jar后生成，所以可执行jar会覆盖普通的jar-->
+                    <classifier>exec</classifier>
+                </configuration>
             </plugin>
         </plugins>
     </build>
