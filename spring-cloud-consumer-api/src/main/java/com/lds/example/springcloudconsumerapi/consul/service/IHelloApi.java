@@ -17,6 +17,6 @@ public interface IHelloApi {
      * @param name
      * @return
      */
-    @RequestMapping(value="/hello", method= RequestMethod.GET)
+    @RequestMapping(value="/hello")
     String hello(@RequestParam("name") String name);
 }

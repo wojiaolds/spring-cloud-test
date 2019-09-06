@@ -1,12 +1,12 @@
 package com.lds.boot.redission;
 
 
-import com.lds.boot.redission.config.RedissLockUtil;
+import com.lds.boot.redission.runnable.TestRunnable;
+import com.lds.boot.redission.service.TestService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import org.redisson.api.RBucket;
-import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,7 +21,6 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import static jodd.util.ThreadUtil.sleep;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -31,12 +30,15 @@ public class SpringBootRedissionApplicationTests {
     private RedissonClient redissonClient;
     
     @Autowired
-    private RedissLockUtil redissLockUtil;
+    private TestService service;
+  
 
     @Test
     public void contextLoads() {
+        
         RBucket<String> key = redissonClient.getBucket("newday");
         key.set("wojiaolds");
+        
         System.out.println("存入的数据："+key.get());
         RBucket<String> key1 = redissonClient.getBucket("newday1");
         key1.set("刘灯松");
@@ -61,8 +63,11 @@ public class SpringBootRedissionApplicationTests {
         File file = new File (filename);
         FileWriter writer = new FileWriter (file);
         BufferedWriter bufferwriter = new BufferedWriter (writer);
+    
+        service.setBufferedWriter (bufferwriter);
         for(int i = 1; i<=10; i++){
-            threadPoolExecutor.submit (new TestRunnable (String.valueOf (i),bufferwriter,latch));
+            service.setName (String.valueOf (i));
+            threadPoolExecutor.submit (new TestRunnable (service,latch));
         }
         
         threadPoolExecutor.shutdown ();
@@ -76,44 +81,5 @@ public class SpringBootRedissionApplicationTests {
         
     }
     
-    class TestRunnable implements Runnable{
-        
-        private String name;
-        private BufferedWriter bufferedWriter;
-        private CountDownLatch latch;
-        public TestRunnable(String name,BufferedWriter bufferedWriter,CountDownLatch latch){
-            this.name = name;
-            this.bufferedWriter = bufferedWriter;
-            this.latch = latch;
-        }
-    
-//        @Lock4j
-        void process() throws Exception{
-    
-            for ( int i = 1 ; i <= 100 ; i++ ) {
-                bufferedWriter.write ("线程" + name + "---->" + i+"\n");
-                //                    bufferedWriter.newLine ();
-                bufferedWriter.flush ();
-                sleep (1);
-            }
-    
-        }
-        
-        @Override
-       
-        public void run () {
-            
-            try {
-                RLock lock = redissLockUtil.lock ("wojiaolds");
-                process();
-                redissLockUtil.unlock (lock);
-            }catch ( Exception e ){
-                System.out.println (e);
-            }
-            latch.countDown ();
-    
-         
-        }
-    }
 
 }

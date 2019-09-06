@@ -12,7 +12,6 @@ import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.jnlp.UnavailableServiceException;
 
 @RestController
 //Spring Cloud Consul Config默认就支持动态刷新

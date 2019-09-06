@@ -1,8 +1,8 @@
-#redisson:
-#  mode: single
-
 redisson:
-  mode: cluster
+  mode: single
+
+#redisson:
+#  mode: cluster
 
 spring:
   aop:
