@@ -22,6 +22,9 @@
 		<module>demo</module>
 		<module>mvc-handler-mapping</module>
 		<module>spring-boot-redission</module>
+		<module>spring-boot-redis-cache</module>
+		<module>spring-boot-messaging-redis</module>
+		<module>spring-boot-zk-client</module>
 	</modules>
 
 </project>
