@@ -27,13 +27,8 @@ public class UserController {
 
     @GetMapping("/create")
     public String create(
-            @RequestParam("id") Long id,
-            @RequestParam("userName") String userName,
-            @RequestParam("userPhone") String userPhone) {
-        UserES userES = new UserES();
-        userES.setId(id);
-        userES.setUserName(userName);
-        userES.setUserPhone(userPhone);
+            UserES userES) {
+
         return repositoryES.save(userES).toString();
     }
 
@@ -62,7 +57,7 @@ public class UserController {
         Page<UserES> items = repositoryES.search(queryBuilder.build());
         // 总条数
         long total = items.getTotalElements();
-        searchs += "总共数据数：" + total + "\n";
+        searchs += "总共数据数：" + total + "\r\n";
         items.forEach(userES -> {
             searchs += userES.toString() + "\n";
         });
